@@ -8,9 +8,9 @@ public class HelloNumbers {
         int y = 0;
         int sum = 0;
         while (x < 10) {
-            while (y <= x){
-              sum = sum + y;
-              y = y + 1;
+            while (y <= x) {
+                sum = sum + y;
+                y = y + 1;
             }
             System.out.print(sum + " ");
             x = x + 1;
