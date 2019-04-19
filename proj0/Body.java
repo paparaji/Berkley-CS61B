@@ -40,7 +40,17 @@ public class Body {
         return G * this.mass * b.mass / Math.pow(this.calcDistance(b), 2);
     }
 
-    /** Return the total force on the x axis */
+    /** Return the force between two Bodys on the x axis */
+    public double calcForceExertedByX(Body b) {
+        return (b.xxPos - this.xxPos) / this.calcDistance(b) * this.calcForceExertedBy(b);
+    }
+
+    /** Return the force between two Bodys on the y axis */
+    public double calcForceExertedByY(Body b) {
+        return (b.yyPos - this.yyPos) / this.calcDistance(b) * this.calcForceExertedBy(b);
+    }
+
+    /** Return the net force on the x axis */
     public double calcNetForceExertedByX(Body[] bodys) {
         double sum = 0;
         for (Body b : bodys) {
@@ -52,7 +62,7 @@ public class Body {
         return sum;
     }
 
-    /** Return the total force on the y axis */
+    /** Return the net force on the y axis */
     public double calcNetForceExertedByY(Body[] bodys) {
         double sum = 0;
         for (Body b : bodys) {
