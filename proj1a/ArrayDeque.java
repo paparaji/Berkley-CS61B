@@ -1,6 +1,8 @@
 public class ArrayDeque<T> {
     private T[] item;
     private int size;
+    private int nextFirst = 7;
+    private int nextLast = 0;
 
     public ArrayDeque() {
         item = (T[]) new Object[8];
@@ -18,33 +20,57 @@ public class ArrayDeque<T> {
      */
     private void resize(int capacity) {
         T[] temp = (T[]) new Object[capacity];
-        System.arraycopy(item, 0, temp, 0, size);
-        item = temp;
+        nextFirst += 1;
+        nextLast -= 1;
+        if (nextFirst == item.length) {
+            nextFirst = 0;
+        }
+        if (nextLast == -1) {
+            nextLast = item.length - 1;
+        }
+        if (nextFirst == 0 && nextLast == item.length - 1) {
+            System.arraycopy(item, 0, temp, 0, item.length);
+            item = temp;
+            nextFirst = item.length - 1;
+            nextLast += 1;
+        } else {
+            System.arraycopy(item, 0, temp, 0, nextLast + 1);
+            System.arraycopy(item, nextFirst, temp, capacity - (item.length - nextFirst) - 1,
+                    item.length - nextFirst);
+            nextFirst = capacity - (item.length - nextFirst) - 2;
+            nextLast += 1;
+            item = temp;
+        }
     }
 
     /**
      * Add the item to the first of the AList
      */
     public void addFirst(T add) {
-        if (item.length < size + 1) {
+        item[nextFirst] = add;
+        nextFirst -= 1;
+        if (nextFirst == -1) {
+            nextFirst = item.length - 1;
+        }
+        size += 1;
+        if (item.length <= size) {
             resize(size * 2);
         }
-        T[] temp = (T[]) new Object[item.length];
-        System.arraycopy(item, 0, temp, 1, size);
-        temp[0] = add;
-        item = temp;
-        size += 1;
     }
 
     /**
      * Add the item to the last of the AList
      */
     public void addLast(T add) {
-        if (item.length < size + 1) {
+        item[nextLast] = add;
+        nextLast += 1;
+        if (nextLast > item.length - 1) {
+            nextLast = 0;
+        }
+        size += 1;
+        if (item.length <= size) {
             resize(size * 2);
         }
-        item[size] = add;
-        size += 1;
     }
 
     /**
@@ -75,42 +101,49 @@ public class ArrayDeque<T> {
      * Remove the first item of the AList
      */
     public T removeFirst() {
-        if(size == 0){
+        if (size == 0) {
             return null;
         }
-        if ((int) 0.25 * item.length > size && item.length >= 16) {
-            resize((int) 0.25 * item.length);
+        nextFirst += 1;
+        if (nextFirst == item.length) {
+            nextFirst = 0;
         }
-
-        T[] temp = (T[]) new Object[item.length];
-        System.arraycopy(item, 1, temp, 0, size - 1);
-        T remove = item[0];
-        item = temp;
         size -= 1;
-        return remove;
+        if ((int) 0.25 * item.length > size && item.length >= 16) {
+            resize(size * 4);
+        } else if ((int) 0.25 * item.length > size && item.length < 16) {
+            resize(16);
+        }
+        return item[nextFirst];
     }
 
     /**
      * Remove the last item of the AList
      */
     public T removeLast() {
-        if(size == 0){
+        if (size == 0) {
             return null;
         }
-        if (0.25 * item.length > size && item.length >= 16) {
-            resize((int) 0.25 * item.length);
+        nextLast -= 1;
+        if (nextLast == -1) {
+            nextLast = item.length - 1;
         }
-        T temp = item[size - 1];
         size -= 1;
-        return temp;
+        if ((int) 0.25 * item.length > size && item.length >= 16) {
+            resize(size * 4);
+        } else if ((int) 0.25 * item.length > size && item.length < 16) {
+            resize(16);
+        }
+        return item[nextLast];
     }
 
     /**
      * Return the ith item of the AList
      */
     public T get(int index) {
-        if (index >= size) {
-            return null;
+        index = nextFirst + 1 + index;
+        if (index > item.length - 1) {
+            index -= item.length;
         }
         return item[index];
     }
