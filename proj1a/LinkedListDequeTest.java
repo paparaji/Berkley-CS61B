@@ -96,24 +96,29 @@ public class LinkedListDequeTest {
 
 
 		lld1.addFirst(0);
-		lld1.removeLast();
-		lld1.addFirst(2);
+		lld1.addLast(1);
+		lld1.removeLast() ;
 		lld1.addFirst(3);
-		lld1.removeFirst();
-		lld1.addFirst(5);
-		lld1.addLast(6);
-		lld1.addFirst(7);
-		lld1.removeLast();
+		lld1.addLast(4);
+		lld1.addLast(5);
+		lld1.addFirst(6);
+		lld1.get(0);
+		lld1.addFirst(8);
 		lld1.addLast(9);
-		lld1.addLast(10);
-		lld1.get(3);
+		lld1.addFirst(10);
+		lld1.removeLast();
+		lld1.addLast(12);
+		lld1.removeLast();
 		lld1.removeFirst();
-		lld1.addLast(13);
-		lld1.get(2);
-		lld1.get(1);
+		lld1.removeFirst();
 		lld1.addLast(16);
-		lld1.addLast(17);
-		lld1.addFirst(18);
+		lld1.removeLast() ;
+		lld1.removeLast();
+		lld1.addLast(19);
+		lld1.removeLast();
+		lld1.get(1);
+		lld1.removeLast();
+		lld1.removeFirst();
 		ArrayDeque<Integer> lld2 = new ArrayDeque<>(lld1);
 		lld1.get(5);
 		if(13 == lld1.get(5)){

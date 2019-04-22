@@ -127,11 +127,12 @@ public class ArrayDeque<T> {
         if (nextFirst == item.length) {
             nextFirst = 0;
         }
+        T result = item[nextFirst];
         size -= 1;
         if ((int) (0.25 * item.length) > size && item.length >= 16) {
             resize((int) (0.5 * item.length));
         }
-        return item[nextFirst];
+        return result;
     }
 
     /**
@@ -145,11 +146,12 @@ public class ArrayDeque<T> {
         if (nextLast == -1) {
             nextLast = item.length - 1;
         }
+        T result = item[nextLast];
         size -= 1;
         if ((int) 0.25 * item.length > size && item.length >= 16) {
             resize((int) (0.5 * item.length));
         }
-        return item[nextLast];
+        return result;
     }
 
     /**
