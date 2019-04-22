@@ -26,7 +26,7 @@ public class LinkedListDeque<T> {
     public LinkedListDeque(LinkedListDeque other) {
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
-
+        sentinel.item = (int) other.sentinel.item;
         for (int i = 0; i < other.size(); i++) {
             addLast((T) other.get(i));
         }
@@ -56,7 +56,7 @@ public class LinkedListDeque<T> {
      * Determine whether the list is empty
      */
     public boolean isEmpty() {
-        return sentinel.next == sentinel;
+        return size == 0;
     }
 
     /**
@@ -88,6 +88,7 @@ public class LinkedListDeque<T> {
         T temp = (T) sentinel.next.item;
         sentinel.next = sentinel.next.next;
         sentinel.next.prev = sentinel;
+        size -= 1;
         return temp;
     }
 
@@ -101,6 +102,7 @@ public class LinkedListDeque<T> {
         T temp = (T) sentinel.prev.item;
         sentinel.prev = sentinel.prev.prev;
         sentinel.prev.next = sentinel;
+        size -= 1;
         return temp;
     }
 

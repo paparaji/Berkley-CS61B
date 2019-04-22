@@ -10,6 +10,7 @@ public class ArrayDeque<T> {
     public ArrayDeque(ArrayDeque other) {
         item = (T[]) new Object[other.item.length];
         System.arraycopy(item, 0, other.item, 0, other.size());
+        size = 0;
     }
 
     /**
@@ -31,6 +32,7 @@ public class ArrayDeque<T> {
         T[] temp = (T[]) new Object[item.length];
         System.arraycopy(item, 0, temp, 1, size);
         temp[0] = add;
+        item = temp;
         size += 1;
     }
 
@@ -73,6 +75,9 @@ public class ArrayDeque<T> {
      * Remove the first item of the AList
      */
     public T removeFirst() {
+        if(size == 0){
+            return null;
+        }
         if (0.25 * item.length > size && item.length >= 16) {
             resize((int) 0.25 * item.length);
         }
@@ -89,6 +94,9 @@ public class ArrayDeque<T> {
      * Remove the last item of the AList
      */
     public T removeLast() {
+        if(size == 0){
+            return null;
+        }
         if (0.25 * item.length > size && item.length >= 16) {
             resize((int) 0.25 * item.length);
         }
