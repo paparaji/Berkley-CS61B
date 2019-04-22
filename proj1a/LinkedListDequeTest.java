@@ -114,6 +114,7 @@ public class LinkedListDequeTest {
 		lld1.addLast(16);
 		lld1.addLast(17);
 		lld1.addFirst(18);
+		ArrayDeque<Integer> lld2 = new ArrayDeque<>(lld1);
 		lld1.get(5);
 		if(13 == lld1.get(5)){
 			System.out.println("True");
@@ -122,9 +123,21 @@ public class LinkedListDequeTest {
 		};
 	}
 
+	public static void Test2(){
+		ArrayDeque<Integer> lld1 = new ArrayDeque<>();
+		for(int i=0;i< 64;i++){
+			lld1.addFirst(i);
+		}
+		for(int i = 0;i<63;i++){
+			lld1.removeFirst();
+		}
+		System.out.println(lld1.get(0));
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Running tests.\n");
 		addIsEmptySizeTest();
 		getTest();
+		Test2();
 	}
 } 

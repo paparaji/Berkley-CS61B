@@ -11,8 +11,10 @@ public class ArrayDeque<T> {
 
     public ArrayDeque(ArrayDeque other) {
         item = (T[]) new Object[other.item.length];
-        System.arraycopy(item, 0, other.item, 0, other.size());
+        System.arraycopy(other.item, 0, item, 0, other.item.length);
         size = other.size();
+        nextFirst = other.nextFirst;
+        nextLast = other.nextLast;
     }
 
     /**
@@ -28,18 +30,35 @@ public class ArrayDeque<T> {
         if (nextLast == -1) {
             nextLast = item.length - 1;
         }
-        if (nextFirst == 0 && nextLast == item.length - 1) {
-            System.arraycopy(item, 0, temp, 0, item.length);
-            item = temp;
-            nextFirst = item.length - 1;
-            nextLast += 1;
+        if(capacity > item.length) {
+            if (nextFirst == 0 && nextLast == item.length - 1) {
+                System.arraycopy(item, 0, temp, 0, item.length);
+                item = temp;
+                nextFirst = item.length - 1;
+                nextLast += 1;
+            } else {
+                System.arraycopy(item, 0, temp, 0, nextLast + 1);
+                System.arraycopy(item, nextFirst, temp, capacity - (item.length - nextFirst),
+                        item.length - nextFirst);
+                nextFirst = capacity - (item.length - nextFirst) - 1;
+                nextLast += 1;
+                item = temp;
+            }
         } else {
-            System.arraycopy(item, 0, temp, 0, nextLast + 1);
-            System.arraycopy(item, nextFirst, temp, capacity - (item.length - nextFirst),
-                    item.length - nextFirst);
-            nextFirst = capacity - (item.length - nextFirst) - 1;
-            nextLast += 1;
-            item = temp;
+            if(nextFirst > nextLast){
+                System.arraycopy(item, 0, temp, 0, nextLast + 1);
+                System.arraycopy(item, nextFirst, temp, capacity - (item.length - nextFirst),
+                        item.length - nextFirst);
+                nextFirst = capacity - (item.length - nextFirst) - 1;
+                nextLast += 1;
+                item = temp;
+            } else {
+                System.arraycopy(item, nextFirst, temp, 0, nextLast - nextFirst + 1);
+                nextLast = nextLast - nextFirst + 1;
+                nextFirst = capacity - 1;
+                item = temp;
+            }
+
         }
     }
 
@@ -109,10 +128,8 @@ public class ArrayDeque<T> {
             nextFirst = 0;
         }
         size -= 1;
-        if ((int) 0.25 * item.length > size && item.length >= 16) {
-            resize(size * 4);
-        } else if ((int) 0.25 * item.length > size && item.length < 16) {
-            resize(16);
+        if ((int) (0.25 * item.length) > size && item.length >= 16) {
+            resize((int) (0.5 * item.length));
         }
         return item[nextFirst];
     }
@@ -130,9 +147,7 @@ public class ArrayDeque<T> {
         }
         size -= 1;
         if ((int) 0.25 * item.length > size && item.length >= 16) {
-            resize(size * 4);
-        } else if ((int) 0.25 * item.length > size && item.length < 16) {
-            resize(16);
+            resize((int) (0.5 * item.length));
         }
         return item[nextLast];
     }
