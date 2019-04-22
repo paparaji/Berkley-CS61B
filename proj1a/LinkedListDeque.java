@@ -26,7 +26,6 @@ public class LinkedListDeque<T> {
     public LinkedListDeque(LinkedListDeque other) {
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
-        sentinel.item = (int) other.sentinel.item;
         for (int i = 0; i < other.size(); i++) {
             addLast((T) other.get(i));
         }
@@ -109,21 +108,21 @@ public class LinkedListDeque<T> {
     /**
      * Return the ith item of the list
      */
-    public T get(int index) {
+    public T getRecursive(int index) {
         recursion = recursion.next;
         if (index == 0 && recursion != sentinel) {
             return (T) recursion.item;
         } else if (index != 0 && recursion == sentinel) {
             return null;
         } else {
-            return get(index - 1);
+            return getRecursive(index - 1);
         }
     }
 
     /**
      * Return the ith item of the list by iteration
      */
-    public T getRecursive(int index) {
+    public T get(int index) {
         if (this.isEmpty()) {
             return null;
         }

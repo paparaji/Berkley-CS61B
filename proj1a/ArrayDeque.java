@@ -115,6 +115,6 @@ public class ArrayDeque<T> {
         if (index > size - 1) {
             return null;
         }
-        return item[index];
+        return item[index - 1];
     }
 }

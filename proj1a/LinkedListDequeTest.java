@@ -82,9 +82,38 @@ public class LinkedListDequeTest {
 
 	}
 
+	/** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
+	public static void getTest() {
+
+		System.out.println("Running add/remove test.");
+
+		LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+		// should be empty
+		boolean passed = checkEmpty(true, lld1.isEmpty());
+
+		// should not be empty
+		passed = checkEmpty(false, lld1.isEmpty()) && passed;
+
+
+		lld1.addFirst(0);
+		lld1.removeLast();
+		lld1.addFirst(2);
+		lld1.get(0);
+		lld1.addFirst(4);
+		lld1.removeFirst();
+		lld1.removeLast();
+		lld1.addLast(7);
+		lld1.addLast(8);
+		if(8 == lld1.getRecursive(1)){
+			System.out.println("True");
+		}else{
+			System.out.println(lld1.getRecursive(1));
+		};
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Running tests.\n");
 		addIsEmptySizeTest();
-		addRemoveTest();
+		getTest();
 	}
 } 
