@@ -18,7 +18,7 @@ public class ArrayDeque<T> {
      */
     private void resize(int capacity) {
         T[] temp = (T[]) new Object[capacity];
-        System.arraycopy(item, 0, temp, 0, size - 1);
+        System.arraycopy(item, 0, temp, 0, size);
         item = temp;
     }
 
@@ -109,9 +109,9 @@ public class ArrayDeque<T> {
      * Return the ith item of the AList
      */
     public T get(int index) {
-        if (index > size - 1) {
+        if (index >= size) {
             return null;
         }
-        return item[index - 1];
+        return item[index];
     }
 }
