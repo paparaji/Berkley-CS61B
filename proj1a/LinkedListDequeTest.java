@@ -98,16 +98,27 @@ public class LinkedListDequeTest {
 		lld1.addFirst(0);
 		lld1.removeLast();
 		lld1.addFirst(2);
-		lld1.get(0);
-		lld1.addFirst(4);
+		lld1.addFirst(3);
 		lld1.removeFirst();
+		lld1.addFirst(5);
+		lld1.addLast(6);
+		lld1.addFirst(7);
 		lld1.removeLast();
-		lld1.addLast(7);
-		lld1.addLast(8);
-		if(8 == lld1.get(1)){
+		lld1.addLast(9);
+		lld1.addLast(10);
+		lld1.get(3);
+		lld1.removeFirst();
+		lld1.addLast(13);
+		lld1.get(2);
+		lld1.get(1);
+		lld1.addLast(16);
+		lld1.addLast(17);
+		lld1.addFirst(18);
+		lld1.get(5);
+		if(13 == lld1.get(5)){
 			System.out.println("True");
 		}else{
-			System.out.println(lld1.get(1));
+			System.out.println(lld1.get(5));
 		};
 	}
 
