@@ -30,7 +30,7 @@ public class ArrayDeque<T> {
         if (nextLast == -1) {
             nextLast = item.length - 1;
         }
-        if(capacity > item.length) {
+        if (capacity > item.length) {
             if (nextFirst == 0 && nextLast == item.length - 1) {
                 System.arraycopy(item, 0, temp, 0, item.length);
                 item = temp;
@@ -45,7 +45,7 @@ public class ArrayDeque<T> {
                 item = temp;
             }
         } else {
-            if(nextFirst > nextLast){
+            if (nextFirst > nextLast) {
                 System.arraycopy(item, 0, temp, 0, nextLast + 1);
                 System.arraycopy(item, nextFirst, temp, capacity - (item.length - nextFirst),
                         item.length - nextFirst);
