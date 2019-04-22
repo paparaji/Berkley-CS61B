@@ -37,7 +37,7 @@ public class ArrayDeque<T> {
             System.arraycopy(item, 0, temp, 0, nextLast + 1);
             System.arraycopy(item, nextFirst, temp, capacity - (item.length - nextFirst),
                     item.length - nextFirst);
-            nextFirst = capacity - (item.length - nextFirst) - 2;
+            nextFirst = capacity - (item.length - nextFirst) - 1;
             nextLast += 1;
             item = temp;
         }
@@ -141,7 +141,7 @@ public class ArrayDeque<T> {
      * Return the ith item of the AList
      */
     public T get(int index) {
-        index = nextFirst + 2 + index;
+        index = nextFirst + 1 + index;
         if (index > item.length - 1) {
             index -= item.length;
         }
