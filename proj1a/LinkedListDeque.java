@@ -111,7 +111,9 @@ public class LinkedListDeque<T> {
     public T getRecursive(int index) {
         recursion = recursion.next;
         if (index == 0 && recursion != sentinel) {
-            return (T) recursion.item;
+            T result = (T) recursion.item;
+            recursion = sentinel;
+            return result;
         } else if (index != 0 && recursion == sentinel) {
             return null;
         } else {

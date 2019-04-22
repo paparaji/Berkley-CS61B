@@ -10,7 +10,7 @@ public class ArrayDeque<T> {
     public ArrayDeque(ArrayDeque other) {
         item = (T[]) new Object[other.item.length];
         System.arraycopy(item, 0, other.item, 0, other.size());
-        size = 0;
+        size = other.size();
     }
 
     /**
@@ -18,7 +18,7 @@ public class ArrayDeque<T> {
      */
     private void resize(int capacity) {
         T[] temp = (T[]) new Object[capacity];
-        System.arraycopy(item, 0, temp, 0, size);
+        System.arraycopy(item, 0, temp, 0, size - 1);
         item = temp;
     }
 
@@ -78,7 +78,7 @@ public class ArrayDeque<T> {
         if(size == 0){
             return null;
         }
-        if (0.25 * item.length > size && item.length >= 16) {
+        if ((int) 0.25 * item.length > size && item.length >= 16) {
             resize((int) 0.25 * item.length);
         }
 
@@ -100,12 +100,9 @@ public class ArrayDeque<T> {
         if (0.25 * item.length > size && item.length >= 16) {
             resize((int) 0.25 * item.length);
         }
-        T[] temp = (T[]) new Object[item.length];
-        System.arraycopy(item, 0, temp, 0, size - 1);
-        T remove = item[size - 1];
-        item = temp;
+        T temp = item[size - 1];
         size -= 1;
-        return remove;
+        return temp;
     }
 
     /**
