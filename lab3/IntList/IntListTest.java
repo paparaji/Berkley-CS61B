@@ -41,6 +41,21 @@ public class IntListTest {
      */
 
     @Test
+    public void testListReverse() {
+        IntList L = IntList.of(1, 2, 3);
+        IntList res = IntList.reverse(L);
+        assertNotEquals(IntList.of(3, 2, 1), L);
+        assertEquals(IntList.of(3, 2, 1), res);
+        IntList L2 = null;
+        res = IntList.reverse(L2);
+        assertEquals(null, res);
+        IntList L3 = IntList.of(1, 2, 3, 4, 3, 3, 3);
+        res = IntList.reverse(L3);
+        assertNotEquals(IntList.of(3, 3, 3, 4, 3, 2, 1), L3);
+        assertEquals(IntList.of(3, 3, 3, 4, 3, 2, 1), res);
+    }
+
+    @Test
     public void testSquareListRecursive() {
         IntList L = IntList.of(1, 2, 3);
         IntList res = IntList.squareListRecursive(L);
