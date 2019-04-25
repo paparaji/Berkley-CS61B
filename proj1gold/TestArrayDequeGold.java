@@ -33,8 +33,10 @@ public class TestArrayDequeGold {
                 studentOutput = test1.removeLast();
                 correctOutput = test2.removeLast();
                 System.out.printf("removeLast()\n");
-                assertEquals("\nStudent was " + studentOutput + ", Correct was " + correctOutput
+                assertEquals("Student was " + studentOutput + ", Correct was " + correctOutput
                         + ".", correctOutput, studentOutput);
+            } else  {
+                assertEquals(test2.isEmpty(), test1.isEmpty());
             }
         }
     }
