@@ -25,6 +25,10 @@ public class TestPalindrome {
         assertTrue(palindrome.isPalindrome("&^^&"));
         assertTrue(palindrome.isPalindrome("  "));
         assertTrue(palindrome.isPalindrome("1"));
+        assertFalse(palindrome.isPalindrome("whale"));
+        assertTrue(palindrome.isPalindrome("xanax"));
+        assertTrue(palindrome.isPalindrome("g"));
+        assertTrue(palindrome.isPalindrome(""));
         assertFalse(palindrome.isPalindrome("cat"));
         assertFalse(palindrome.isPalindrome("nhh"));
     }

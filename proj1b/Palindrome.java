@@ -10,16 +10,18 @@ public class Palindrome {
 
     /** Determine whether the word is Palindrome */
     public boolean isPalindrome(String word) {
-        int n = word.length() / 2;
-        Deque result = wordToDeque(word);
-        for (int i = 0; i < n; i++) {
-            char first = (char) result.removeFirst();
-            char last = (char) result.removeLast();
-            if (first != last) {
-                return false;
-            }
+        Deque list = wordToDeque(word);
+        return isPalindromehelper(list);
+    }
+
+    public boolean isPalindromehelper(Deque list) {
+        if (list.size() <= 1) {
+            return true;
+        } else if (list.removeFirst() == list.removeLast()) {
+            return isPalindromehelper(list);
+        } else {
+            return false;
         }
-        return true;
     }
 
     /** Determine whether the word is Palindrome with the specific rules */
