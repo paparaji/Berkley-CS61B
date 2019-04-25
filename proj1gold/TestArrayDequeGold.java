@@ -26,15 +26,13 @@ public class TestArrayDequeGold {
                 studentOutput = test1.removeFirst();
                 correctOutput = test2.removeFirst();
                 System.out.printf("removeFirst()\n");
-                assertEquals("\nStudent was " + studentOutput + ", Correct was " + correctOutput
-                        + " .", correctOutput, studentOutput);
+                assertEquals(correctOutput, studentOutput);
             } else if (numberBetweenZeroAndOne >= 0 && numberBetweenZeroAndOne < 0.25
                     && !test1.isEmpty() && !test2.isEmpty()) {
                 studentOutput = test1.removeLast();
                 correctOutput = test2.removeLast();
                 System.out.printf("removeLast()\n");
-                assertEquals("Student was " + studentOutput + ", Correct was " + correctOutput
-                        + ".", correctOutput, studentOutput);
+                assertEquals(correctOutput, studentOutput);
             } else  {
                 assertEquals(test2.isEmpty(), test1.isEmpty());
             }
