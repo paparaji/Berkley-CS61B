@@ -35,12 +35,17 @@ public class TestPalindrome {
 
     @Test
     public void testisPalindrome2() {
-        assertTrue(palindrome.isPalindrome("flake", test));
-        assertTrue(palindrome.isPalindrome("acdb", test));
-        assertTrue(palindrome.isPalindrome(" ", test));
-        assertTrue(palindrome.isPalindrome("", test));
-        assertFalse(palindrome.isPalindrome("  ", test));
-        assertFalse(palindrome.isPalindrome("acca", test));
-        assertFalse(palindrome.isPalindrome("nhhchr", test));
+        OffByOne comp = new OffByOne();
+        assertFalse(palindrome.isPalindrome("tweak", comp));
+        assertTrue(palindrome.isPalindrome("flake", comp));
+        assertTrue(palindrome.isPalindrome("t", comp));
+        assertTrue(palindrome.isPalindrome("", comp));
+        assertTrue(palindrome.isPalindrome("flake", comp));
+        assertTrue(palindrome.isPalindrome("acdb", comp));
+        assertTrue(palindrome.isPalindrome(" ", comp));
+        assertTrue(palindrome.isPalindrome("", comp));
+        assertFalse(palindrome.isPalindrome("  ", comp));
+        assertFalse(palindrome.isPalindrome("acca", comp));
+        assertFalse(palindrome.isPalindrome("nhhchr", comp));
     }
 }
