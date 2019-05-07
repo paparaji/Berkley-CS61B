@@ -1,7 +1,5 @@
 import org.junit.Test;
 
-import java.util.NoSuchElementException;
-
 import static org.junit.Assert.*;
 
 public class TestUnionFind {
@@ -9,6 +7,7 @@ public class TestUnionFind {
     @Test
     public void TestConnect(){
         UnionFind test = new UnionFind(8);
+
         assertFalse(test.connected(3, 4));
         test.union(1, 2);
         assertTrue(test.connected(1, 2));

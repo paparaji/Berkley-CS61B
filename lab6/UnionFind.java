@@ -1,20 +1,15 @@
-import java.util.NoSuchElementException;
-
 public class UnionFind {
 
     // TODO - Add instance variables?
     private int[] node;
-    private int[] size;
 
     /* Creates a UnionFind data structure holding n vertices. Initially, all
        vertices are in disjoint sets. */
     public UnionFind(int n) {
         // TODO
         node = new int[n];
-        size = new int[n];
         for (int i = 0; i < n; i++) {
             node[i] = -1;
-            size[i] = 1;
         }
     }
 
@@ -29,18 +24,15 @@ public class UnionFind {
     /* Returns the size of the set v1 belongs to. */
     public int sizeOf(int v1) {
         // TODO
-        return size[v1];
+        return -parent(find(v1));
     }
 
     /* Returns the parent of v1. If v1 is the root of a tree, returns the
        negative size of the tree for which v1 is the root. */
     public int parent(int v1) {
         // TODO
-        if (node[v1] == -1) {
-            return -size[v1];
-        } else {
-            return node[v1];
-        }
+        validate(v1);
+        return node[v1];
     }
 
     /* Returns true if nodes v1 and v2 are connected. */
@@ -60,15 +52,18 @@ public class UnionFind {
         // TODO
         validate(v1);
         validate(v2);
-        if (v1 != v2){
+        if (connected(v1, v2)) {
+            return;
+        }
+        if (v1 != v2) {
             v1 = find(v1);
             v2 = find(v2);
             if (sizeOf(v1) > sizeOf(v2)) {
+                node[v1] -= sizeOf(v2);
                 node[v2] = v1;
-                size[v1] += size[v2];
             } else {
+                node[v2] -= sizeOf(v1);
                 node[v1] = v2;
-                size[v2] += size[v1];
             }
         }
     }
@@ -80,10 +75,10 @@ public class UnionFind {
         validate(vertex);
         int temp = vertex;
         int temp2 = 0;
-        while (parent(temp) > 0) {
+        while (parent(temp) > -1) {
             temp = parent(temp);
         }
-        while (parent(vertex) > 0) {
+        while (vertex != temp) {
             temp2 = node[vertex];
             node[vertex] = temp;
             vertex = temp2;
