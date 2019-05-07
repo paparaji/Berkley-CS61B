@@ -22,7 +22,7 @@ public class UnionFind {
     private void validate(int vertex) {
         // TODO
         if (vertex < 0 | vertex > node.length - 1) {
-            throw new NoSuchElementException();
+            throw new IllegalArgumentException();
         }
     }
 
@@ -60,14 +60,16 @@ public class UnionFind {
         // TODO
         validate(v1);
         validate(v2);
-        v1 = find(v1);
-        v2 = find(v2);
-        if (size[v1] > size[v2]) {
-            node[v2] = v1;
-            size[v1] += size[v2];
-        } else {
-            node[v1] = v2;
-            size[v2] += size[v1];
+        if (v1 != v2){
+            v1 = find(v1);
+            v2 = find(v2);
+            if (sizeOf(v1) > sizeOf(v2)) {
+                node[v2] = v1;
+                size[v1] += size[v2];
+            } else {
+                node[v1] = v2;
+                size[v2] += size[v1];
+            }
         }
     }
 
