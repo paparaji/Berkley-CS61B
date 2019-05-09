@@ -27,9 +27,14 @@ public class BubbleGrid {
                 }
             }
         }
-        int temp = count - 1;
+        int temp = 0;
         UnionFind Bubbles = new UnionFind(row * column);
         for (int i = 0; i < darts.length; i++) {
+            if (darts[i][0] == 0) {
+                temp = count;
+            } else {
+                temp = count - 1;
+            }
             if (grid[darts[i][0]][darts[i][1]] == 0) {
                 result[i] = 0;
             } else {
@@ -65,7 +70,7 @@ public class BubbleGrid {
                                 }
                             }
                         }
-                        if(exist){
+                        if (exist) {
                             exist_column = true;
                         }
                         exist = false;
@@ -76,29 +81,6 @@ public class BubbleGrid {
                     exist_column = true;
                 }
                 grid[darts[i][0]][darts[i][1]] = 1;
-               /* if (darts[i][0] != 0) {
-                    if (grid[darts[i][0]][darts[i][1]] == 1) {
-                        for (int y = 0; y < column; y++) {
-                            if (Bubbles.connected(grid[0][y], (darts[i][0] - 1) * column + darts[i][1])) {
-                                Bubbles.union(darts[i][0] * column + darts[i][1], (darts[i][0] - 1) * column + darts[i][1]);
-                            }
-                        }
-                    }
-                    if (darts[i][1] != 0 && grid[darts[i][0]][darts[i][1] - 1] == 1) {
-                        for (int y = 0; y < column; y++) {
-                            if (Bubbles.connected(grid[0][y], darts[i][0] * column + darts[i][1] - 1)) {
-                                Bubbles.union(darts[i][0] * column + darts[i][1], darts[i][0] * column + darts[i][1] - 1);
-                            }
-                        }
-                    }
-                    if (darts[i][1] != column - 1 && grid[darts[i][0]][darts[i][1] + 1] == 1) {
-                        for (int y = 0; y < column; y++) {
-                            if (Bubbles.connected(grid[0][y], darts[i][0] * column + darts[i][1] + 1)) {
-                                Bubbles.union(darts[i][0] * column + darts[i][1], darts[i][0] * column + darts[i][1] + 1);
-                            }
-                        }
-                    }
-                }*/
                 for (int k = 0; k < column; k++) {
                     if (grid[0][k] == 1) {
                         temp = temp - Bubbles.sizeOf(k);
