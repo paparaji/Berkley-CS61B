@@ -10,8 +10,8 @@ public class BubbleGridTest {
                         {1, 0, 0},
                         {1, 1, 0},
                         {1, 1, 1}};
-        int[][] darts = {{2, 2}, {2, 0}};
-        int[] expected = {0, 4};
+        int[][] darts = {{2, 2}, {3, 0}};
+        int[] expected = {0, 0};
 
         validate(grid, darts, expected);
     }
