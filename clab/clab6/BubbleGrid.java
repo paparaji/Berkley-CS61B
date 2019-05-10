@@ -91,8 +91,8 @@ public class BubbleGrid {
                     do {
                         exist_loop = false;
                         boolean exist_temp = false;
-                        for (int k = row - 1; k >= 0; k--) {
-                            for (int x = column - 1; x >= 0; x--) {
+                        for (int k = row - 1; k > 0; k--) {
+                            for (int x = column - 1; x > 0; x--) {
                                 for (int a = 0; a < column; a++) {
                                     if (Bubbles.connected(a, k * column + x)) {
                                         exist_temp = true;
@@ -104,6 +104,16 @@ public class BubbleGrid {
                                     continue;
                                 }
                                 if (grid[k][x] == 1) {
+                                    if (grid[k - 1][x] == 1) {
+                                        for (int y = 0; y < column; y++) {
+                                            if (Bubbles.connected(y, (k - 1) * column + x)) {
+                                                Bubbles.union(k * column + x, (k - 1) * column + x);
+                                                exist = true;
+                                                exist_loop = true;
+                                                break;
+                                            }
+                                        }
+                                    }
                                     if (k != row - 1 && grid[k + 1][x] == 1) {
                                         for (int y = 0; y < column; y++) {
                                             if (Bubbles.connected(y, (k + 1) * column + x)) {
