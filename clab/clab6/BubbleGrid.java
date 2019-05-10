@@ -92,7 +92,7 @@ public class BubbleGrid {
                         exist_loop = false;
                         boolean exist_temp = false;
                         for (int k = row - 1; k > 0; k--) {
-                            for (int x = column - 1; x > 0; x--) {
+                            for (int x = column - 1; x >= 0; x--) {
                                 for (int a = 0; a < column; a++) {
                                     if (Bubbles.connected(a, k * column + x)) {
                                         exist_temp = true;
