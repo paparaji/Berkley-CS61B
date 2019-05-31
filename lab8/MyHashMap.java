@@ -11,21 +11,21 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     private int initialSize;
     private double loadFactor;
 
-    MyHashMap() {
+    public MyHashMap() {
         this.initialSize = 16;
         this.loadFactor = 0.75;
         initializeMap(initialSize);
         this.keySet = new HashSet<>();
     }
 
-    MyHashMap(int initialSize) {
+    public MyHashMap(int initialSize) {
         this.initialSize = initialSize;
         this.loadFactor = 0.75;
         initializeMap(initialSize);
         this.keySet = new HashSet<>();
     }
 
-    MyHashMap(int initialSize, double loadFactor) {
+    public MyHashMap(int initialSize, double loadFactor) {
         this.initialSize = initialSize;
         this.loadFactor = loadFactor;
         initializeMap(initialSize);
