@@ -2,7 +2,6 @@ package hw2;
 
 import edu.princeton.cs.introcs.StdRandom;
 import edu.princeton.cs.introcs.StdStats;
-import edu.princeton.cs.introcs.Stopwatch;
 
 public class PercolationStats {
 
@@ -15,14 +14,14 @@ public class PercolationStats {
             throw new IllegalArgumentException();
         }
         this.result = new double[T];
-        this.length = N;
+        this.length = T;
         for (int i = 0; i < T; i++) {
             int count = 0;
             Percolation temp = pf.make(N);
             while (!temp.percolates()) {
                 int temp1 = StdRandom.uniform(0, N);
                 int temp2 = StdRandom.uniform(0, N);
-                if (temp.isOpen(temp1, temp2)){
+                if (temp.isOpen(temp1, temp2)) {
                     continue;
                 }
                 temp.open(temp1, temp2);
@@ -50,20 +49,23 @@ public class PercolationStats {
      * Return the low bound of 95% confidence interval
      */
     public double confidenceLow() {
-        return mean() - 1.96 * stddev() / Math.sqrt(length);
+        return this.mean() - 1.96 * (this.stddev() / Math.sqrt(length));
     }
 
     /**
      * Return the high bound of 95% confidence interval
      */
     public double confidenceHigh() {
-        return mean() + 1.96 * stddev() / Math.sqrt(length);
+        return this.mean() + 1.96 * (this.stddev() / Math.sqrt(length));
     }
 
-    private static void main(String[] args) {
-        int a = StdRandom.uniform(0, 10);
-        int b = StdRandom.uniform(0, 10);
-        System.out.println(a);
-        System.out.println(b);
+    public static void main(String[] args) {
+        PercolationStats temp = new PercolationStats(20, 10, new PercolationFactory());
+        System.out.println(temp.mean());
+        System.out.println(temp.mean());
+        System.out.println(temp.stddev());
+        System.out.println(temp.mean() - 1.96 * temp.stddev() / Math.sqrt(10));
+        System.out.println(temp.confidenceLow());
+        System.out.println(temp.confidenceHigh());
     }
 }

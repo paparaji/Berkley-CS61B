@@ -105,10 +105,14 @@ public class Percolation {
      * Return whether the map is percolated
      */
     public boolean percolates() {
+        if (length == 1 && !isOpen(0, 0)) {
+            return false;
+        }
         return map2.connected(0, (length - 1) * length);
     }
 
-    private static void main(String[] args) {
-
+    public static void main(String[] args) {
+        Percolation temp = new Percolation(1);
+        System.out.println(temp.percolates());
     }
 }
