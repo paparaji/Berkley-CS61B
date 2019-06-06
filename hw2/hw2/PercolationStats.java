@@ -59,7 +59,7 @@ public class PercolationStats {
         return this.mean() + 1.96 * (this.stddev() / Math.sqrt(length));
     }
 
-    public static void main(String[] args) {
+    private static void main(String[] args) {
         PercolationStats temp = new PercolationStats(20, 10, new PercolationFactory());
         System.out.println(temp.mean());
         System.out.println(temp.mean());
