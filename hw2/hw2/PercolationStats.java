@@ -11,16 +11,21 @@ public class PercolationStats {
     private int length;
 
     public PercolationStats(int N, int T, PercolationFactory pf) {
-        this.result = new double[T];
-        this.length = N;
         if (N <= 0 || T <= 0) {
             throw new IllegalArgumentException();
         }
+        this.result = new double[T];
+        this.length = N;
         for (int i = 0; i < T; i++) {
             int count = 0;
             Percolation temp = pf.make(N);
             while (!temp.percolates()) {
-                temp.open(StdRandom.uniform(0, N), StdRandom.uniform(0, N));
+                int temp1 = StdRandom.uniform(0, N);
+                int temp2 = StdRandom.uniform(0, N);
+                if (temp.isOpen(temp1, temp2)){
+                    continue;
+                }
+                temp.open(temp1, temp2);
                 count += 1;
             }
             result[i] = (double) count / (double) (N * N);
@@ -55,9 +60,10 @@ public class PercolationStats {
         return mean() + 1.96 * stddev() / Math.sqrt(length);
     }
 
-    public static void main(String[] args) {
-        Stopwatch temp = new Stopwatch();
-        PercolationStats temp2 = new PercolationStats(250, 200, new PercolationFactory());
-        System.out.println(temp.elapsedTime());
+    private static void main(String[] args) {
+        int a = StdRandom.uniform(0, 10);
+        int b = StdRandom.uniform(0, 10);
+        System.out.println(a);
+        System.out.println(b);
     }
 }

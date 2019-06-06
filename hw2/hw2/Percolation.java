@@ -108,7 +108,7 @@ public class Percolation {
         return map2.connected(0, (length - 1) * length);
     }
 
-    public static void main(String[] args) {
+    private static void main(String[] args) {
 
     }
 }
