@@ -35,6 +35,11 @@ public class TestRouter {
     }
 
     @Test
+    public void testPrefix() throws Exception {
+        List<String> result = graph.getLocationsByPrefix("mon");
+    }
+
+    @Test
     public void testShortestPath() throws Exception {
         List<Map<String, Double>> testParams = paramsFromFile();
         List<List<Long>> expectedResults = resultsFromFile();
